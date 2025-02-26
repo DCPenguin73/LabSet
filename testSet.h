@@ -44,16 +44,16 @@ public:
       //test_constructRange_empty();
       //test_constructRange_one();
       //test_constructRange_standard();
-      //test_destructor_empty();
-      //test_destructor_standard();
+      test_destructor_empty();
+      test_destructor_standard();
 
       // Assign
-     /* test_assign_emptyToEmpty();
+      test_assign_emptyToEmpty();
       test_assign_standardToEmpty();
       test_assign_emptyToStandard();
       test_assign_oneToStandard();
       test_assign_standardToOne();
-      test_assign_standardToStandard();*/
+      test_assign_standardToStandard();
       test_assignMove_emptyToEmpty();
       test_assignMove_standardToEmpty();
       test_assignMove_emptyToStandard();
@@ -84,10 +84,10 @@ public:
       test_iterator_dereference_standardRead();*/
 
       // Access
-      /*test_find_empty();
+      test_find_empty();
       test_find_standardBegin();
       test_find_standardLast();
-      test_find_standardMissing();*/
+      test_find_standardMissing();
 
       // Insert
       /*test_insert_empty();

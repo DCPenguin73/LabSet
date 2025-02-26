@@ -61,6 +61,11 @@ public:
 
    set & operator = (const set & rhs)
    {
+      if (this != &rhs)
+      {
+         //clear();
+         bst = rhs.bst;
+      }
       return *this;
    }
    set & operator = (set && rhs)
@@ -87,11 +92,11 @@ public:
    class iterator;
    iterator begin() const noexcept 
    { 
-      return iterator(); 
+      return iterator(bst.begin()); 
    }
    iterator end() const noexcept 
    { 
-      return iterator(); 
+      return iterator(bst.end()); 
    }
 
    //
@@ -99,7 +104,7 @@ public:
    //
    iterator find(const T& t) 
    { 
-      return iterator(); 
+      return iterator(bst.find(t)); 
    }
 
    //
@@ -173,10 +178,8 @@ class set <T> :: iterator
    friend class custom::set<T>;
 public:
    // constructors, destructors, and assignment operator
-   iterator() 
-   { 
-   }
-   iterator(const typename custom::BST<T>::iterator& itRHS) 
+   iterator() : it() {}
+   iterator(const typename custom::BST<T>::iterator& itRHS)  
    {  
    }
    iterator(const iterator & rhs) 
