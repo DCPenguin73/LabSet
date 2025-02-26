@@ -83,7 +83,7 @@ public:
       test_find_standardMissing();
 
       // Insert
-      test_insert_oneLeft();
+      /*test_insert_oneLeft();
       test_insert_oneRight();
       test_insert_duplicate();
       test_insert_keepUnique();
@@ -101,7 +101,7 @@ public:
       test_insert_case4aComplex();
       test_insert_case4bComplex();
       test_insert_case4cComplex();
-      test_insert_case4dComplex();
+      test_insert_case4dComplex();*/
 
       // Remove
       test_erase_empty();

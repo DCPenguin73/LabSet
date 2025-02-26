@@ -44,23 +44,16 @@ public:
    // 
    // Construct
    //
-   set() 
-   { 
-   }
-   set(const set &  rhs)
-   { 
-   }
-   set(set && rhs) 
-   { 
-   }
-   set(const std::initializer_list <T> & il) 
-   {
-   }
+   set() : bst() {}
+   set(const set& rhs) : bst(rhs.bst) {}
+   set(set&& rhs) : bst(std::move(rhs.bst)) {}
+   set(const std::initializer_list <T>& il) : bst(il) {}
    template <class Iterator>
    set(Iterator first, Iterator last) 
    {
+      // Still needs done
    }
-  ~set() { }
+  ~set() {}
 
    //
    // Assign
@@ -72,6 +65,10 @@ public:
    }
    set & operator = (set && rhs)
    {
+      if (this != &rhs) {
+         clear();
+         bst.swap(rhs.bst);
+      }
       return *this;
    }
    set & operator = (const std::initializer_list <T> & il)
@@ -80,6 +77,7 @@ public:
    }
    void swap(set& rhs) noexcept
    {
+      bst.swap(rhs.bst);
    }
 
    //
@@ -109,11 +107,11 @@ public:
    //
    bool empty() const noexcept 
    { 
-      return true;    
+      return bst.empty();
    }
    size_t size() const noexcept 
    { 
-      return 99;     
+      return bst.size();
    }
 
    //
@@ -143,6 +141,7 @@ public:
    //
    void clear() noexcept 
    { 
+      bst.clear();
    }
    iterator erase(iterator &it)
    { 
