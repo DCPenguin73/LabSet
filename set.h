@@ -163,15 +163,22 @@ public:
    }
    iterator erase(iterator &it)
    {
-      return iterator();
+
+      return iterator(bst.erase(it.it));
    }
    size_t erase(const T & t)
    {
-      return 99;
+      iterator it = find(t);
+      if (it == end())
+         return 0;
+      erase(it);
+      return 1;
    }
    iterator erase(iterator &itBegin, iterator &itEnd)
    {
-      return iterator();
+      while (itBegin != itEnd)
+         itBegin = erase(itBegin);
+      return itEnd;
    }
 
 private:
