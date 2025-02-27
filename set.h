@@ -47,14 +47,16 @@ public:
    set() : bst() {}
    set(const set& rhs) : bst(rhs.bst) {}
    set(set&& rhs) : bst(std::move(rhs.bst)) {}
-   set(const std::initializer_list <T>& il) : bst(il) {}
+   set(const std::initializer_list <T>& il)
+   {
+      for (auto it = il.begin(); it < il.end(); it++)
+         insert(*it);
+   }
    template <class Iterator>
    set(Iterator first, Iterator last)
    {
       for (auto it = first; it < last; it++)
-      {
          insert(*it);
-      }
    }
   ~set() {}
 
@@ -127,20 +129,28 @@ public:
    //
    std::pair<iterator, bool> insert(const T& t)
    {
-      std::pair<iterator, bool> bst_pair = bst.insert(t);
+      std::pair<iterator, bool> bst_pair = bst.insert(t, true);
       return std::pair<iterator, bool>(iterator(bst_pair.first), bst_pair.second);
    }
    std::pair<iterator, bool> insert(T&& t)
    {
-      std::pair<iterator, bool> p(iterator(), true);
-      return p;
+      std::pair<iterator, bool> bst_pair = bst.insert(std::move(t), true);
+      return std::pair<iterator, bool>(iterator(bst_pair.first), bst_pair.second);
    }
    void insert(const std::initializer_list <T>& il)
    {
+      for (auto it = il.begin(); it < il.end(); it++)
+      {
+         insert(*it);
+      }
    }
    template <class Iterator>
    void insert(Iterator first, Iterator last)
    {
+      for (auto it = first; it < last; it++)
+      {
+         it++;
+      }
    }
 
 
