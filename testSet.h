@@ -38,9 +38,9 @@ public:
       test_constructMove_empty();
       test_constructMove_one();
       test_constructMove_standard();
-      //test_constructInit_empty();
-      //test_constructInit_one();
-      //test_constructInit_standard();
+      test_constructInit_empty();
+      test_constructInit_one();
+      test_constructInit_standard();
       //test_constructRange_empty();
       //test_constructRange_one();
       //test_constructRange_standard();
@@ -84,10 +84,10 @@ public:
       test_iterator_dereference_standardRead();
 
       // Access
-      // test_find_empty();
-      // test_find_standardBegin();
-      // test_find_standardLast();
-      // test_find_standardMissing();
+       test_find_empty();
+       test_find_standardBegin();
+       test_find_standardLast();
+       test_find_standardMissing();
 
       // Insert
       test_insert_empty();
