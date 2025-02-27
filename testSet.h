@@ -41,9 +41,9 @@ public:
       test_constructInit_empty();
       test_constructInit_one();
       test_constructInit_standard();
-      //test_constructRange_empty();
-      //test_constructRange_one();
-      //test_constructRange_standard();
+      test_constructRange_empty();
+      test_constructRange_one();
+      test_constructRange_standard();
       test_destructor_empty();
       test_destructor_standard();
 

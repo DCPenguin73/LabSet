@@ -47,45 +47,43 @@ public:
    set() : bst() {}
    set(const set& rhs) : bst(rhs.bst) {}
    set(set&& rhs) : bst(std::move(rhs.bst)) {}
-   set(const std::initializer_list <T>& il) : bst(il) {}
+   set(const std::initializer_list<T>& il) : bst()
+   {
+      for (const auto& element : il)
+         bst.insert(element, true); // Ensure keepUnique is true
+   }
    template <class Iterator>
    set(Iterator first, Iterator last)
    {
-      for (auto it = first; it < last; it++)
-      {
+      for (auto it = first; it != last; it++)
          insert(*it);
-      }
    }
-  ~set() {}
+   ~set() {}
 
    //
    // Assign
    //
 
-   set & operator = (const set & rhs)
+   set& operator=(const set& rhs)
+   {
+      if (this != &rhs)
+         bst = rhs.bst;
+      return *this;
+   }
+   set& operator=(set&& rhs)
    {
       if (this != &rhs)
       {
-         //clear();
-         bst = rhs.bst;
-      }
-      return *this;
-   }
-   set & operator = (set && rhs)
-   {
-      if (this != &rhs) {
          clear();
          bst.swap(rhs.bst);
       }
       return *this;
    }
-   set & operator = (const std::initializer_list <T> & il)
+   set& operator=(const std::initializer_list<T>& il)
    {
       clear();
       for (auto it = il.begin(); it != il.end(); it++)
-      {
          insert(*it);
-      }
       return *this;
    }
    void swap(set& rhs) noexcept
@@ -132,31 +130,28 @@ public:
    //
    std::pair<iterator, bool> insert(const T& t)
    {
-      auto bst_pair = bst.insert(t);
+      auto bst_pair = bst.insert(t, true); // Ensure keepUnique is true
       return std::pair<iterator, bool>(iterator(bst_pair.first), bst_pair.second);
    }
 
    std::pair<iterator, bool> insert(T&& t)
    {
-      auto bst_pair = bst.insert(std::move(t));
+      auto bst_pair = bst.insert(std::move(t), true); // Ensure keepUnique is true
       return std::pair<iterator, bool>(iterator(bst_pair.first), bst_pair.second);
    }
-   void insert(const std::initializer_list <T>& il)
+
+   void insert(const std::initializer_list<T>& il)
    {
       for (auto it = il.begin(); it != il.end(); it++)
-      {
          insert(*it);
-      }
    }
+
    template <class Iterator>
    void insert(Iterator first, Iterator last)
    {
-      for (auto it = first; it < last; it++)
-      {
+      for (auto it = first; it != last; it++)
          insert(*it);
-      }
    }
-
 
    //
    // Remove
@@ -165,11 +160,11 @@ public:
    {
       bst.clear();
    }
-   iterator erase(iterator &it)
+   iterator erase(iterator& it)
    {
       return iterator(bst.erase(it.it));
    }
-   size_t erase(const T & t)
+   size_t erase(const T& t)
    {
       iterator it = find(t);
       if (it != end())
@@ -177,19 +172,17 @@ public:
          erase(it);
          return 1;
       }
+      return 0;
    }
-   iterator erase(iterator &itBegin, iterator &itEnd)
+   iterator erase(iterator& itBegin, iterator& itEnd)
    {
       while (itBegin != itEnd)
-      {
          itBegin = erase(itBegin);
-      }
       return itEnd;
    }
 
 private:
-
-   custom::BST <T> bst;
+   custom::BST<T> bst;
 };
 
 
@@ -205,13 +198,8 @@ class set <T> :: iterator
 public:
    // constructors, destructors, and assignment operator
    iterator() :it(nullptr) {}
-   iterator(const typename custom::BST<T>::iterator& itRHS)
-   : it(itRHS)
-   {
-   }
-   iterator(const iterator & rhs) : it(rhs.it)
-   {
-   }
+   iterator(const typename custom::BST<T>::iterator& itRHS) : it(itRHS) { }
+   iterator(const iterator & rhs) : it(rhs.it) {}
    iterator & operator = (const iterator & rhs)
    {
       it = rhs.it;
