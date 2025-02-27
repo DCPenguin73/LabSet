@@ -81,6 +81,11 @@ public:
    }
    set & operator = (const std::initializer_list <T> & il)
    {
+      clear();
+      for (auto it = il.begin(); it != il.end(); it++)
+      {
+         insert(*it);
+      }
       return *this;
    }
    void swap(set& rhs) noexcept
@@ -127,20 +132,29 @@ public:
    //
    std::pair<iterator, bool> insert(const T& t)
    {
-      std::pair<iterator, bool> bst_pair = bst.insert(t);
+      auto bst_pair = bst.insert(t);
       return std::pair<iterator, bool>(iterator(bst_pair.first), bst_pair.second);
    }
+
    std::pair<iterator, bool> insert(T&& t)
    {
-      std::pair<iterator, bool> p(iterator(), true);
-      return p;
+      auto bst_pair = bst.insert(std::move(t));
+      return std::pair<iterator, bool>(iterator(bst_pair.first), bst_pair.second);
    }
    void insert(const std::initializer_list <T>& il)
    {
+      for (auto it = il.begin(); it != il.end(); it++)
+      {
+         insert(*it);
+      }
    }
    template <class Iterator>
    void insert(Iterator first, Iterator last)
    {
+      for (auto it = first; it < last; it++)
+      {
+         insert(*it);
+      }
    }
 
 
@@ -153,15 +167,24 @@ public:
    }
    iterator erase(iterator &it)
    {
-      return iterator();
+      return iterator(bst.erase(it.it));
    }
    size_t erase(const T & t)
    {
-      return 99;
+      iterator it = find(t);
+      if (it != end())
+      {
+         erase(it);
+         return 1;
+      }
    }
    iterator erase(iterator &itBegin, iterator &itEnd)
    {
-      return iterator();
+      while (itBegin != itEnd)
+      {
+         itBegin = erase(itBegin);
+      }
+      return itEnd;
    }
 
 private:

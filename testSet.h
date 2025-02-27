@@ -60,12 +60,12 @@ public:
       test_assignMove_oneToStandard();
       test_assignMove_standardToOne();
       test_assignMove_standardToStandard();
-      /*test_assignInit_emptyToEmpty();
+      test_assignInit_emptyToEmpty();
       test_assignInit_standardToEmpty();
       test_assignInit_emptyToStandard();
       test_assignInit_oneToStandard();
       test_assignInit_standardToOne();
-      test_assignInit_standardToStandard();*/
+      test_assignInit_standardToStandard();
       test_swap_emptyToEmpty();
       test_swap_standardToEmpty();
       test_swap_emptyToStandard();
@@ -92,24 +92,24 @@ public:
       // Insert
       test_insert_empty();
       test_insert_standardEnd();
-      // test_insert_standardFront();
-      // test_insert_standardMiddle();
-      // test_insert_standardDuplicate();
-      // test_insertMove_empty();
-      // test_insertMove_standardEnd();
-      // test_insertMove_standardFront();
-      // test_insertMove_standardMiddle();
-      // test_insertMove_standardDuplicate();
-      // test_insertInit_emptyInsertNone();
-      // test_insertInit_emptyInsertMany();
-      // test_insertInit_standardInsertNone();
-      // test_insertInit_standardInsertDuplicates();
-      // test_insertInit_manyInsertMany();
+       test_insert_standardFront();
+       test_insert_standardMiddle();
+       test_insert_standardDuplicate();
+       test_insertMove_empty();
+       test_insertMove_standardEnd();
+       test_insertMove_standardFront();
+       test_insertMove_standardMiddle();
+       test_insertMove_standardDuplicate();
+       test_insertInit_emptyInsertNone();
+       test_insertInit_emptyInsertMany();
+       test_insertInit_standardInsertNone();
+       test_insertInit_standardInsertDuplicates();
+       test_insertInit_manyInsertMany();
 
       // Remove
       test_clear_empty();
       test_clear_standard();
-      /*test_eraseRange_several();
+      test_eraseRange_several();
       test_eraseIterator_empty();
       test_eraseIterator_standardMissing();
       test_eraseIterator_noChildren();
@@ -124,7 +124,7 @@ public:
       test_eraseRange_standardOne();
       test_eraseRange_standardMany();
       test_eraseRange_oneChild();
-      test_eraseRange_twoChildren();*/
+      test_eraseRange_twoChildren();
 
       // Status
       test_empty_empty();
