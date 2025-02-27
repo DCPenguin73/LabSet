@@ -413,7 +413,7 @@ void BST <T> :: swap (BST <T>& rhs)
 template <typename T>
 std::pair<typename BST <T> :: iterator, bool> BST <T> :: insert(const T & t, bool keepUnique)
 {
-    std::pair<iterator, bool> pairReturn(end(), false);
+   std::pair<iterator, bool> pairReturn(end(), false);
 
    // If empty, just insert at the root and return
    if (empty()) {
@@ -432,10 +432,8 @@ std::pair<typename BST <T> :: iterator, bool> BST <T> :: insert(const T & t, boo
 
    while (current != nullptr) {
       parent = current;
-      if (keepUnique)
-      {
-         if (t == current->data)
-         {
+      if (keepUnique) {
+         if (t == current->data) {
             pairReturn.first = iterator(current);
             pairReturn.second = false;
             return pairReturn;
@@ -444,7 +442,8 @@ std::pair<typename BST <T> :: iterator, bool> BST <T> :: insert(const T & t, boo
       if (t < current->data) {
          goLeft = true;
          current = current->pLeft;
-      } else {
+      }
+      else {
          goLeft = false;
          current = current->pRight;
       }
@@ -457,7 +456,8 @@ std::pair<typename BST <T> :: iterator, bool> BST <T> :: insert(const T & t, boo
 
    if (goLeft) {
       parent->addLeft(newNode);
-   } else {
+   }
+   else {
       parent->addRight(newNode);
    }
 
@@ -470,9 +470,9 @@ std::pair<typename BST <T> :: iterator, bool> BST <T> :: insert(const T & t, boo
 
    // Ensure root is set properly
    BNode* head = newNode;
-      while (head->pParent != nullptr)
-         head = head->pParent;
-      root = head;
+   while (head->pParent != nullptr)
+      head = head->pParent;
+   root = head;
 
    return pairReturn;
 }
